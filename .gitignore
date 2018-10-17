@@ -1,4 +1,4 @@
 db.sqlite3
 __pycache__
 *.pyc
-Test-Driven Development with Python_ Obey the Testing Goat_ Using Django, Selenium, and JavaScript [Percival 2014-06-29].pdf
+*.pdf
