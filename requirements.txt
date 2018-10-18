@@ -6,6 +6,7 @@ more-itertools==4.3.0
 pluggy==0.8.0
 py==1.7.0
 pytest==3.8.2
+pytest-django==3.4.3
 pytz==2018.5
 selenium==3.14.1
 six==1.11.0
