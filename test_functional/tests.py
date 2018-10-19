@@ -75,7 +75,8 @@ def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     inputbox = browser.find_element_by_id('id_new_item')
     inputbox.send_keys('Buy milk')
     inputbox.send_keys(Keys.ENTER)
-    
+    time.sleep(0.2)
+
     # Francis got his own unique URL
     francis_list_url = browser.current_url
     assert '/lists/' in francis_list_url

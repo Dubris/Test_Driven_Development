@@ -25,35 +25,6 @@ class TestHomePage():
         assert expected_html == response.content.decode()
 
 
-    def test_home_page_can_save_a_POST_request(self):
-        request = HttpRequest()
-        request.method = 'POST'
-        request.POST['item_text'] = 'A new list item'
-
-        response = home_page(request)
-        
-        assert Item.objects.count() == 1
-        new_item = Item.objects.first()
-        assert new_item.text == 'A new list item'
-
-
-    def test_home_page_redirects_after_POST(self):
-        request = HttpRequest()
-        request.method = 'POST'
-        request.POST['item_text'] = 'A new list item'
-
-        response = home_page(request)
-
-        assert response.status_code == 302
-        assert response['location'] == '/lists/the-only-list-in-the-world/'
-
-
-    def test_home_page_only_saves_items_when_necessary(self):
-        request = HttpRequest()
-        home_page(request)
-        assert Item.objects.count() == 0
-
-
 class TestListView():
 
     simpletestcase = SimpleTestCase()
@@ -92,3 +63,29 @@ class TestItemModel():
             second_saved_item = saved_items[1]
             assert first_saved_item.text == 'The first (ever) list item'
             assert second_saved_item.text == 'Item the second'
+            
+
+class TestNewList():
+
+
+    simpletestcase = SimpleTestCase()
+
+    def test_saving_a_POST_request(self, client):
+        client.post('/lists/new',
+        data={'item_text': 'A new list item'}
+        )
+        
+        assert Item.objects.count() == 1
+        new_item = Item.objects.first()
+        assert new_item.text == 'A new list item'
+
+
+    def test_redirects_after_POST(self, client):
+        response = client.post('/lists/new',
+        data={'item_text': "A new list item"}
+        )
+
+        assert response.status_code == 302
+        assert self.simpletestcase.assertRedirects(
+        response, '/lists/the-only-list-in-the-world/'
+        ) is None
