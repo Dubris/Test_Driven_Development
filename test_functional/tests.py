@@ -43,7 +43,7 @@ def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     inputbox.send_keys(Keys.ENTER)
     time.sleep(0.2)
     edith_list_url = browser.current_url
-    assert re.match(r'/lists/.+', edith_list_url)
+    assert '/lists/' in edith_list_url
     check_for_row_in_list_table(browser, '1: Buy peacock feathers')
 
     # There is still a text box inviting her to add another item. She
@@ -51,7 +51,7 @@ def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     inputbox = browser.find_element_by_id('id_new_item')
     inputbox.send_keys('Use peacock feathers to make a fly')
     inputbox.send_keys(Keys.ENTER)
-    time.sleep(1)
+    time.sleep(0.2)
     
     # The page updates again, and now shows both items on her list
     check_for_row_in_list_table(browser, '1: Buy peacock feathers')
@@ -78,13 +78,15 @@ def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     
     # Francis got his own unique URL
     francis_list_url = browser.current_url
-    assert re.match(r'/lists/.+', francis_list_url)
+    assert '/lists/' in francis_list_url
     assert francis_list_url != edith_list_url
     
     # Again, there is no trace of Edith's list
     page_text = browser.find_element_by_tag_name('body').text
     assert 'Buy peacock feathers' not in page_text
     assert 'Buy milk' in page_text
+    
+    browser.quit()
     pytest.fail('Finish the test')
     
     # Satisfied, they both go to sleep
