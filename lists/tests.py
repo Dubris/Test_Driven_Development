@@ -121,15 +121,10 @@ class TestNewItem():
     simpletestcase = SimpleTestCase()
 
     def test_can_save_a_POST_request_to_an_existing_list(self, client):
-        #other_list = List.objects.create()
+        other_list = List.objects.create()
         correct_list = List.objects.create()
         
-        url_target = 'lists/%d/add_item' % (correct_list.id,)
-        print(url_target)
-        print(re.match(r'^lists/(\d+)/add_item$', url_target))
-        
-        
-        client.post(url_target,
+        client.post('/lists/%d/add_item' % (correct_list.id,),
         data = {'item_text': 'A new item for an existing list'}
         )
 
@@ -143,7 +138,7 @@ class TestNewItem():
         other_list = List.objects.create()
         correct_list = List.objects.create()
         
-        response = client.post('lists/%d/add_item' % (correct_list.id,),
+        response = client.post('/lists/%d/add_item' % (correct_list.id,),
         data = {'item_text': 'A new item for an existing list'}
         )
         

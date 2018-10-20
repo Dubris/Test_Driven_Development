@@ -20,6 +20,25 @@ def check_for_row_in_list_table(browser, row_text):
     assert row_text in [row.text for row in rows]
 
 
+def test_layout_and_styling(browser, live_server):
+    # Edith goes to the homepage
+    browser.get(live_server.url)
+    browser.set_window_size(1024, 768)
+    
+    #She notices the input box is nicely centered
+    inputbox = browser.find_element_by_id('id_new_item')
+    assert 512 == pytest.approx(
+    inputbox.location['x'] + inputbox.size['width'] / 2, abs = 15
+    )
+    
+    #She starts a new list and sees the input is nicely centered
+    inputbox.send_keys('testing\n')
+    inputbox = browser.find_element_by_id('id_new_item')
+    assert 512 == pytest.approx(
+    inputbox.location['x'] + inputbox.size['width'] / 2, abs = 15
+    )
+    
+
 def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     # Edith has heard about a cool new online to-do app. She goes
     # to check out its homepage
@@ -51,7 +70,7 @@ def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     inputbox = browser.find_element_by_id('id_new_item')
     inputbox.send_keys('Use peacock feathers to make a fly')
     inputbox.send_keys(Keys.ENTER)
-    time.sleep(0.2)
+    time.sleep(2)
     
     # The page updates again, and now shows both items on her list
     check_for_row_in_list_table(browser, '1: Buy peacock feathers')
@@ -75,7 +94,7 @@ def test_can_start_a_list_and_retrieve_it_later(browser, live_server):
     inputbox = browser.find_element_by_id('id_new_item')
     inputbox.send_keys('Buy milk')
     inputbox.send_keys(Keys.ENTER)
-    time.sleep(0.2)
+    time.sleep(2)
 
     # Francis got his own unique URL
     francis_list_url = browser.current_url
