@@ -76,8 +76,7 @@ class TestNewVisitor(TestFunctional):
         assert 'Buy milk' in page_text
         
         self.browser.quit()
-        pytest.fail('Finish the test')
-        
+ 
         # Satisfied, they both go to sleep
         
         # Edith wonders whether the site will remember her list. Then
