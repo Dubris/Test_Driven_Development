@@ -1,8 +1,8 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 
-import pytest
 import sys
+
 
 class TestFunctional(StaticLiveServerTestCase):
 

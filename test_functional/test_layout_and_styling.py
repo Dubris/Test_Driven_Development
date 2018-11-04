@@ -1,6 +1,4 @@
-from base import TestFunctional
-
-import pytest
+from .base import TestFunctional
 
 
 class TestLayoutandStyling(TestFunctional):
@@ -9,16 +7,16 @@ class TestLayoutandStyling(TestFunctional):
         # Edith goes to the homepage
         self.browser.get(self.server_url)
         self.browser.set_window_size(1024, 768)
-        
-        #She notices the input box is nicely centered
+
+        # She notices the input box is nicely centered
         inputbox = self.get_item_input_box()
-        self.assertAlmostEqual (
-        inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta = 10
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10
         )
-        
-        #She starts a new list and sees the input is nicely centered
+
+        # She starts a new list and sees the input is nicely centered
         inputbox.send_keys('testing\n')
         inputbox = self.get_item_input_box()
-        self.assertAlmostEqual (
-        inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta = 10
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10
         )
