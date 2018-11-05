@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>Javascript tests</title>
-	<link rel="stylesheet" href="qunit.css">
+    <meta charset="UTF-8">
+    <title>Javascript tests</title>
+    <link rel="stylesheet" href="qunit.css">
 </head>
 
 <body>
-	<div id="qunit"></div>
-	<div id="qunit-fixture">
-		<form>
-			<input name="text">
-			<div class="text-danger">Error text</div>
-		</form>
-	</div>
-
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-	<script src="qunit.js"></script>
-	<script src="../list.js"></script>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+        <form>
+            <input name="text">
+            <div class="text-danger">Error text</div>
+        </form>
+    </div>
+    <script src="http://code.jquery.com/jquery.min.js" />
+    <script src="qunit.js"/>
+	<script src="../list.js"/>
 	<script>
-/*global $, test, equal*/
+	/*global $, test, equal*/
 
-QUnit.test('error should be hidden on keypress', function(assert) {
-  $('input').trigger('keypress');
-  assert.equal($('.text-danger').is(':visible'), false);
-});
+	QUnit.test('error should be hidden on keypress', function(assert) {
+	  $('input').trigger('keypress');
+	  assert.equal($('.text-danger').is(':visible'), false);
+	});
 
-QUnit.test('errors not be hidden unless there is a keypress', function(assert) {
-	assert.equal($('.text-danger').is(':visible'), true);
-});
+	QUnit.test('errors not be hidden unless there is a keypress', function(assert) {
+		assert.equal($('.text-danger').is(':visible'), true);
+	});
 
 	</script>
 </body>
+
 </html>

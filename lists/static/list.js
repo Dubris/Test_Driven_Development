@@ -1,3 +1,3 @@
-$('div').on('keypress', function() {
+$("div").on('keypress', function() {
 	$('.text-danger').hide();
 });

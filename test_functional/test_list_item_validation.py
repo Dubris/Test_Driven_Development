@@ -1,4 +1,5 @@
 from .base import TestFunctional
+import time
 
 
 class TestItemValidation(TestFunctional):
@@ -54,6 +55,7 @@ class TestItemValidation(TestFunctional):
 
         # She starts typing in the input box to clear the error
         self.get_item_input_box().send_keys('a')
+        time.sleep(5)
         # She is pleased to see that the error message disappears
         error = self.get_error_element()
         assert error.is_displayed() is False
