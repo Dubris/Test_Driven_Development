@@ -25,7 +25,7 @@ class LoginTest(TestFunctional):
         # Edith goes to the site
         # and notices a "Sign in" link for the first time
         self.browser.get(self.server_url)
-        self.browser.find_element_by_id('btn-login').click()
+        self.browser.find_element_by_id('id_login').click()
 
         # An auth0 login box appears
         self.switch_to_new_window('Sign In with Auth0')
@@ -49,6 +49,6 @@ class LoginTest(TestFunctional):
         self.switch_to_new_window('To-Do lists')
 
         # She can see that she is logged in
-        self.wait_for_element_with_id('btn-logout')
+        self.wait_for_element_with_id('id_logout')
         navbar = self.browser.find_element_by_css_selector('.navbar')
         assert 'testswebappli@gmail.com' in navbar.text

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript tests</title>
+    <link rel="stylesheet" href="../../../superlists/static/tests/qunit.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+        <form>
+            <a id="id_login">Sign in</a>
+        </form>
+    </div>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="../../../superlists/static/tests/qunit.js"></script>
+    <script src="../accounts.js"></script>
+    <script>
+    /*global $, test, equal*/
+
+    QUnit.test('initialize binds sign in button to navigator.id.request', function(assert) {
+        var requestWasCalled = false;
+        var mockRequestFunction = function() { requestWasCalled = true; };
+        var mockNavigator = {
+            id: {
+                request: mockRequestFunction
+            }
+        };
+
+        Superlists.Accounts.initialize(mockNavigator);
+        assert.equal(requestWasCalled, false, 'check request not called before click')
+        $('#id_login').trigger('click');
+        assert.equal(requestWasCalled, true, 'check request called after click');
+
+    });
+    </script>
+</body>
+
+</html>
